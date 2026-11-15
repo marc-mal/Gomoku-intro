@@ -1,0 +1,321 @@
+:root {
+  --ink-950: #100b08;
+  --ink-900: #18120e;
+  --ink-800: #241a13;
+  --ink-700: #33251b;
+  --wood-700: #4a3423;
+  --wood-500: #7a5a3c;
+  --paper: #f4ead6;
+  --paper-2: #eadcc0;
+  --paper-3: #d9c6a2;
+  --vermilion: #b33a2d;
+  --vermilion-2: #d45a41;
+  --gold: #c9a227;
+  --muted: #9a8a75;
+  --text: #f2e8d5;
+  --text-muted: #b9aa93;
+  --text-dark: #241a12;
+  --text-dark-muted: #6c5843;
+  --serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', 'SimSun', serif;
+  --sans: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+  --radius-lg: 26px;
+  --radius-md: 16px;
+  --shadow-paper: 0 30px 80px rgb(0 0 0 / 45%), inset 0 0 0 1px rgb(74 52 35 / 10%);
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background:
+    radial-gradient(1100px 620px at 82% -8%, rgb(201 162 39 / 10%), transparent 62%),
+    radial-gradient(900px 540px at 6% 8%, rgb(179 58 45 / 8%), transparent 58%),
+    linear-gradient(180deg, #1b1410 0%, #120d0a 52%, #1a130f 100%);
+}
+
+/* 木纹 / 纸纤维的极轻噪点 —— 只用 CSS，不依赖外网图片 */
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  content: '';
+  opacity: 0.35;
+  background-image:
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 1.2%) 0 1px, transparent 1px 6px),
+    repeating-linear-gradient(0deg, rgb(0 0 0 / 2.4%) 0 1px, transparent 1px 4px);
+  mix-blend-mode: overlay;
+}
+
+#app {
+  position: relative;
+  z-index: 1;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+[id] {
+  scroll-margin-top: 90px;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  color: var(--paper);
+  background: var(--vermilion);
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.container {
+  width: min(1180px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+.section {
+  position: relative;
+  padding: 92px 0;
+}
+
+.section--tight {
+  padding-top: 24px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  color: var(--vermilion-2);
+  font-family: var(--serif);
+  font-size: 13px;
+  letter-spacing: 0.24em;
+}
+
+.eyebrow::before {
+  width: 22px;
+  height: 1px;
+  content: '';
+  background: currentColor;
+}
+
+.section-head {
+  max-width: 720px;
+  margin-bottom: 44px;
+}
+
+.section-head h2 {
+  margin-top: 18px;
+  font-size: clamp(30px, 4vw, 50px);
+  line-height: 1.22;
+  color: var(--text-dark);
+}
+
+.section-head .lede {
+  margin-top: 18px;
+  color: var(--text-dark-muted);
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.section-head--dark h2 {
+  color: var(--text);
+}
+
+.section-head--dark .lede {
+  color: var(--text-muted);
+}
+
+/* ── 宣纸面板 ─────────────────────────────────────────────── */
+.paper-panel {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(30px, 5vw, 68px);
+  color: var(--text-dark);
+  background:
+    radial-gradient(130% 90% at 4% 0%, rgb(255 255 255 / 70%), transparent 46%),
+    radial-gradient(120% 100% at 100% 100%, rgb(179 58 45 / 6%), transparent 50%),
+    linear-gradient(180deg, #f7efdd 0%, #eee1c8 100%);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-paper);
+}
+
+.paper-panel::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+  background-image:
+    repeating-linear-gradient(0deg, rgb(74 52 35 / 3.4%) 0 1px, transparent 1px 5px),
+    repeating-linear-gradient(90deg, rgb(74 52 35 / 2.2%) 0 1px, transparent 1px 7px);
+}
+
+.paper-panel::after {
+  position: absolute;
+  top: -140px;
+  right: -120px;
+  width: 380px;
+  height: 380px;
+  pointer-events: none;
+  content: '';
+  background: radial-gradient(circle, rgb(179 58 45 / 9%), transparent 68%);
+  border-radius: 50%;
+}
+
+.paper-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── 按钮 ─────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 0 26px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  transition:
+    transform 0.25s var(--ease),
+    background-color 0.25s var(--ease),
+    border-color 0.25s var(--ease),
+    box-shadow 0.25s var(--ease);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn--primary {
+  color: var(--paper);
+  background: linear-gradient(135deg, #c14a37, #963022);
+  box-shadow: 0 14px 32px rgb(179 58 45 / 30%);
+}
+
+.btn--primary:hover {
+  box-shadow: 0 18px 40px rgb(179 58 45 / 42%);
+}
+
+.btn--ghost {
+  color: var(--text);
+  background: rgb(255 255 255 / 4%);
+  border-color: rgb(201 162 39 / 34%);
+}
+
+.btn--ghost:hover {
+  background: rgb(201 162 39 / 10%);
+  border-color: rgb(201 162 39 / 58%);
+}
+
+/* ── 标签 ─────────────────────────────────────────────────── */
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag-row li {
+  padding: 4px 11px;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--text-dark-muted);
+  background: rgb(255 255 255 / 46%);
+  border: 1px solid rgb(74 52 35 / 16%);
+  border-radius: 999px;
+}
+
+.tag-row--dark li {
+  color: var(--text-muted);
+  background: rgb(255 255 255 / 4%);
+  border-color: rgb(201 162 39 / 20%);
+}
+
+/* ── 滚动显现 ─────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.75s var(--ease),
+    transform 0.75s var(--ease);
+}
+
+.reveal.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .container {
+    width: calc(100% - 32px);
+  }
+
+  .section {
+    padding: 64px 0;
+  }
+
+  .paper-panel {
+    border-radius: 20px;
+  }
+}
